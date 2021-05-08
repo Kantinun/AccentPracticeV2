@@ -143,4 +143,8 @@ export class DetailComponent implements OnInit {
           console.log("Error -> " + err.message);
         });
     }
+
+    makeFavorite(){
+      this.data.makeFavorite(this.word.word)
+    }
 }

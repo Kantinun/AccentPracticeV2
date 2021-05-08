@@ -1,9 +1,13 @@
 <ActionBar> 
     <NavigationButton android.systemIcon="ic_menu_back" (tap)="back()"></NavigationButton>
+    <ActionItem (tap)="filter()">
+        <button class="favDisabel" text="☆" *ngIf="filterFav === false"></button>
+        <button class="favActive" text="⭐" *ngIf="filterFav === true"></button>
+    </ActionItem>
 </ActionBar>
 <ScrollView>
     <StackLayout>
         <Button *ngFor="let word of words" text="{{ word.word }}"  (tap)="goDetail(word.word)"></Button>
-        <button text="+" [nsRouterLink]="['/addWord']"></button>
+        <button text="+" [nsRouterLink]="['/addWord']" *ngIf="filterFav === false"></button>
     </StackLayout>
 </ScrollView>

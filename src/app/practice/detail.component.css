@@ -15,3 +15,14 @@ button:active{
     border-width: 5;
     color: salmon;
 }
+.favActive{
+    background-color: rgb(98, 183, 253);
+    font-size: 25px;  
+}
+.favDisabel{
+    background-color: rgb(98, 183, 253);
+    font-size: 35px;  
+    color: black;
+}
+
+

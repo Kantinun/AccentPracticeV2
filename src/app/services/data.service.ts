@@ -6,6 +6,7 @@ export interface Data {
     word: string
     defi: string
     wordImage : any
+    favorite: boolean
   }
 
 @Injectable({
@@ -14,9 +15,9 @@ export interface Data {
 
 export class DataService {
   private Datas = new Array<Data>(
-    { word: "Dog", defi: 'สุนัข' , wordImage : null},
-    { word: "Cat", defi: 'เเมว' , wordImage : null},
-    { word: "Pig", defi: 'หมู'  , wordImage : null},
+    { word: "Dog", defi: 'สุนัข' , wordImage : null, favorite: false},
+    { word: "Cat", defi: 'เเมว' , wordImage : null, favorite: false},
+    { word: "Pig", defi: 'หมู'  , wordImage : null, favorite: false},
   )
   speakOptions:SpeakOptions;
   constructor(private tts:TNSTextToSpeech){
@@ -57,7 +58,7 @@ export class DataService {
       temp.push(this.Datas[i].word.toLowerCase())
     }
     if(!temp.includes(word.toLowerCase())){
-      this.Datas.push({word: word, defi: definition , wordImage : null})
+      this.Datas.push({word: word, defi: definition , wordImage : null, favorite: false})
       AppSettings.setString("myDatas", JSON.stringify(this.Datas));
     }else{
       Dialogs.alert({
@@ -96,5 +97,16 @@ export class DataService {
     AppSettings.setString("myDatas", JSON.stringify(this.Datas));
   }
 
-  
+  makeFavorite(word:string){
+    for(let i =0;i<this.Datas.length;i++){
+      if(this.Datas[i].word === word){
+        this.Datas[i].favorite = !this.Datas[i].favorite;
+      }
+    }
+    AppSettings.setString("myDatas", JSON.stringify(this.Datas));
+  }
+
+  getFavorite(): Data[] {
+    return this.Datas.filter((Data) => Data.favorite == true)
+  }
 }

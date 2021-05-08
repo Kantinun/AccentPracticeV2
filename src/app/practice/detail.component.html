@@ -2,6 +2,10 @@
     <ActionItem android.position="right" icon="✏️" (tap)="goEdit()">
         <label text="✏️" ></label>
     </ActionItem>
+    <ActionItem (tap)="makeFavorite()">
+        <button class="favDisabel" text="☆" *ngIf="word.favorite === false"></button>
+        <button class="favActive" text="⭐" *ngIf="word.favorite === true"></button>
+    </ActionItem>
     <NavigationButton android.systemIcon="ic_menu_back" (tap)="back()"></NavigationButton>
 </ActionBar>
 <ScrollView>
